@@ -1,0 +1,10 @@
+﻿@model Microsoft.AspNetCore.Identity.IdentityRole
+<form asp-controller="Role"
+      asp-action="AddRole" method="post">
+    <label asp-for="Name"></label>
+    <input asp-for="Name" />
+    <br />
+    <!--makes register button on registration form work-->
+    <button type="submit">Add Role</button>
+</form>
+<p><a asp-controller="Role" asp-action="AllRole">No additions necessary. Back to Role list</a></p>
