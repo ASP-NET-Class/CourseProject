@@ -8,7 +8,9 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace CourseProject.Controllers
 {
-    [Authorize(Roles="Swimmer")]
+    // makes it so only Swimmers and Administrators have access to the Swimmer Controller 
+    // and being able to make changes
+    [Authorize(Roles= "Swimmer, Administrator")]
     public class SwimmerController : Controller
     {
         private readonly ApplicationDbContext db;

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace CourseProject.ViewModels
 {
-    public class RoleAddUserRoleViewModel
+    public class AdminAddUserRoleViewModel
     {
         public ApplicationUser User { get; set; }
         public string Role { get; set; }

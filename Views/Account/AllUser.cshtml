@@ -1,13 +1,13 @@
 ﻿@model IEnumerable<Microsoft.AspNetCore.Identity.IdentityUser>
-<p><a asp-action="Register">Add a User</a></p>
 @{
     if (Model.Count() < 1)
     {
+        <p><a asp-action="Register">Add a User</a></p>
         <p>No user in database yet.</p>
     }
     else
     {
-        <h3>All Users</h3>
+        <h2>All Users</h2>
         <table border="1">
             <tr>
                 <th>User Name</th>
@@ -17,10 +17,10 @@
             {
                 <tr>
                     <td>@user.UserName</td>
-                    <!--makes the Add a role text hyperlink which will go to the RoleController and
+                    <!--makes the Add a role text hyperlink which will go to the AdminController and
                         AddUserRole method with a value of user.Id-->
                     <td>
-                        <a asp-controller="Role"
+                        <a asp-controller="Admin"
                            asp-action="AddUserRole"
                            asp-route-id="@user.Id">
                             Add a role
@@ -31,3 +31,5 @@
         </table>
     }
 }
+
+<p><a asp-controller="Admin" asp-action="Index">Back to Administrator Homepage</a></p>

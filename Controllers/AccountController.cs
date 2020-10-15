@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using CourseProject.Models;
 using CourseProject.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
@@ -87,6 +88,10 @@ namespace CourseProject.Controllers
                     {
                         return RedirectToAction("Index", "Coach");
                     }
+                    if (roles.Contains("Administrator"))
+                    {
+                        return RedirectToAction("Index", "Admin");
+                    }
                     else if (roles.Contains("Swimmer"))
                     {
                         return RedirectToAction("Index", "Swimmer");
@@ -102,6 +107,14 @@ namespace CourseProject.Controllers
         {
             var users = db.Users.ToList();
             return View(users);
+        }
+
+        // logout method
+        [HttpPost]
+        public async Task<IActionResult> Logout()
+        {
+            await signInManager.SignOutAsync();
+            return RedirectToAction("Login");
         }
 
 

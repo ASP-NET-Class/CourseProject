@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
-// L33t H4X0rz
+// L33t H4X0rz: Robert Gzyl, Trent Lyons, Justin Sapp, Jake McGinnis
 // CISS 411
 // Software Architecture and Testing
 // 10OCT20

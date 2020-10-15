@@ -8,7 +8,9 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace CourseProject.Controllers
 {
-    [Authorize(Roles="Coach")]
+    // makes it so only Coaches and Administrators have access to the Coach Controller 
+    // and being able to make changes
+    [Authorize(Roles="Coach, Administrator")]
     public class CoachController : Controller
     {
         private readonly ApplicationDbContext db;

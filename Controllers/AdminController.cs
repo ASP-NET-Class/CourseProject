@@ -16,12 +16,12 @@ namespace CourseProject.Controllers
     [Authorize(Roles ="Administrator")]
 
 
-    public class RoleController : Controller
+    public class AdminController : Controller
     {
         ApplicationDbContext db;
         UserManager<ApplicationUser> userManager;
         RoleManager<IdentityRole> roleManager;
-        public RoleController(ApplicationDbContext db,
+        public AdminController(ApplicationDbContext db,
             UserManager<ApplicationUser> userManager,
             RoleManager<IdentityRole> roleManager)
         {
@@ -59,7 +59,7 @@ namespace CourseProject.Controllers
                 Id = x.Id,
                 Value = x.Name
             }).ToList();
-            RoleAddUserRoleViewModel vm = new RoleAddUserRoleViewModel();
+            AdminAddUserRoleViewModel vm = new AdminAddUserRoleViewModel();
             var user = await userManager.FindByIdAsync(id);
             vm.User = user;
             vm.RoleList = new SelectList(roleDisplay, "Id", "Value");
@@ -69,7 +69,7 @@ namespace CourseProject.Controllers
         // saves the assignment of a role to a user to the database
         [HttpPost]
         public async Task<IActionResult> AddUserRole
-            (RoleAddUserRoleViewModel vm)
+            (AdminAddUserRoleViewModel vm)
         {
             var user = await userManager.FindByIdAsync(vm.User.Id);
             var role = await roleManager.FindByIdAsync(vm.Role);
@@ -92,6 +92,27 @@ namespace CourseProject.Controllers
             vm.User = user;
             vm.RoleList = new SelectList(roleDisplay, "Id", "Value");
             return View(vm);
+        }
+
+        // directs to the AddLesson View
+        // THIS IS THE POINT THAT I LEFT OFF AT (ROBERT GZYL 15OCT20)
+        public IActionResult AddLesson()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> AddLesson(Lesson lesson)
+        {
+            db.Add(lesson);
+            await db.SaveChangesAsync();
+            return RedirectToAction("Index", "Admin");
+        }
+
+        // directs to the AllLesson View
+        public IActionResult AllLesson()
+        {
+            return View();
         }
 
 
