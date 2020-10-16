@@ -95,7 +95,6 @@ namespace CourseProject.Controllers
         }
 
         // directs to the AddLesson View
-        // THIS IS THE POINT THAT I LEFT OFF AT (ROBERT GZYL 15OCT20)
         public IActionResult AddLesson()
         {
             return View();
@@ -106,13 +105,13 @@ namespace CourseProject.Controllers
         {
             db.Add(lesson);
             await db.SaveChangesAsync();
-            return RedirectToAction("Index", "Admin");
+            return RedirectToAction("AllLesson", "Admin");
         }
 
         // directs to the AllLesson View
         public IActionResult AllLesson()
         {
-            return View();
+            return View(db.Lessons);
         }
 
 

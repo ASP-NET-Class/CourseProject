@@ -1,3 +1,34 @@
-﻿<h2>All Lessons</h2>
+﻿@model IEnumerable<CourseProject.Models.Lesson>
+<!--Microsoft.AspNetCore.Identity.IdentityRole-->
 
+@{
+    if (Model.Count() < 1)
+    {
+        <p><a asp-action="AddLesson">Add a Lesson</a></p>
+        <p>No lessons in database yet.</p>
+    }
+    else
+    {
+        <h2>All Lessons</h2>
+        <table border="1">
+            <tr>
+                <th>Lesson ID</th>
+                <th>Lesson Title</th>
+                <th>Skill Level</th>
+                <th>Tuition</th>
+            </tr>
+            @foreach (var lesson in Model)
+            {
+                <tr>
+                    <td>@lesson.LessonId</td>
+                    <td>@lesson.LessonTitle</td>
+                    <td>@lesson.SkillLevel</td>
+                    <td>@lesson.Tuition</td>
+                </tr>
+            }
+        </table>
+        <p><a asp-controller="Admin" asp-action="AddLesson">Add a Lesson</a></p>
+    }
+}
+<br />
 <p><a asp-controller="Admin" asp-action="Index">Back to Administrator Homepage</a></p>

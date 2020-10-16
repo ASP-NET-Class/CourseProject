@@ -4,14 +4,16 @@ using CourseProject.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace CourseProject.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20201016071743_M5")]
+    partial class M5
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -133,27 +135,6 @@ namespace CourseProject.Migrations
                     b.HasIndex("SwimmerId");
 
                     b.ToTable("Enrollments");
-                });
-
-            modelBuilder.Entity("CourseProject.Models.Lesson", b =>
-                {
-                    b.Property<int>("LessonId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("LessonTitle")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("SkillLevel")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("Tuition")
-                        .HasColumnType("int");
-
-                    b.HasKey("LessonId");
-
-                    b.ToTable("Lessons");
                 });
 
             modelBuilder.Entity("CourseProject.Models.Session", b =>

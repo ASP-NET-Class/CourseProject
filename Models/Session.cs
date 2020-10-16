@@ -8,6 +8,7 @@ namespace CourseProject.Models
     public class Session
     {
         public int SessionId { get; set; }
+        public string SessionTitle { get; set; }
         /*public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; } */
         public int SeatCapacity { get; set; }
