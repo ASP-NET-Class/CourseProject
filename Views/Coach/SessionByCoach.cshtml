@@ -1,0 +1,39 @@
+﻿@model IEnumerable<CourseProject.Models.Session>
+<h2>@Model.FirstOrDefault().Coach.CoachName</h2>
+@{
+    if (Model.Count() < 1)
+    {
+        <p>
+            You don't have any sessions yet. <a asp-for="AddSession">
+                Add a session
+            </a>
+        </p>
+    }
+    else
+    {
+        <h3>All Sessions</h3>
+        <table border="1">
+            <tr>
+                <th>Session ID</th>
+                <th>Session Title</th>
+                <th>Seat Capacity</th>
+                <th>Post Grade</th>
+            </tr>
+            @foreach (var session in Model)
+            {
+                <tr>
+                    <td>@session.SessionId</td>
+                    <td>@session.SessionTitle</td>
+                    <td>@session.SeatCapacity</td>
+                    <td>
+                        <a asp-controller="Coach"
+                           asp-action="PostGrade"
+                           asp-route-id="@session.SessionId">
+                            Post grade
+                        </a>
+                </tr>
+            }
+        </table>
+    }
+}
+<p><a asp-action="Index">Back to coach home</a></p>

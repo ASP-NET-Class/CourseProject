@@ -1,16 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using CourseProject.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace CourseProject.Controllers
 {
-    // makes it so only Coaches and Administrators have access to the Coach Controller 
-    // and being able to make changes
-    [Authorize(Roles="Coach, Administrator")]
+    [Authorize(Roles = "Coach")]
     public class CoachController : Controller
     {
         private readonly ApplicationDbContext db;
@@ -23,5 +23,96 @@ namespace CourseProject.Controllers
         {
             return View();
         }
+        public IActionResult AddProfile()
+        {
+            var currentUserId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            Coach coach = new Coach();
+            if (db.Coaches.Any(i => i.UserId == currentUserId))
+            {
+                coach = db.Coaches.FirstOrDefault
+                    (i => i.UserId == currentUserId);
+            }
+            else
+            {
+                coach.UserId = currentUserId;
+            }
+            return View(coach);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> AddProfile
+            (Coach coach)
+        {
+            var currentUserId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            if (db.Coaches.Any
+                (i => i.UserId == currentUserId))
+            {
+                var coachToUpdate = db.Coaches.FirstOrDefault
+                    (i => i.UserId == currentUserId);
+                coachToUpdate.CoachName = coach.CoachName;
+                coachToUpdate.CoachEmail = coach.CoachEmail;
+                coachToUpdate.CoachPhone = coach.CoachPhone;
+                db.Update(coachToUpdate);
+            }
+            else
+            {
+                db.Add(coach);
+            }
+            await db.SaveChangesAsync();
+            return View("Index");
+        }
+        public IActionResult AddSession()
+        {
+            Session session = new Session();
+            var currentUserId = this.User.FindFirst
+                (ClaimTypes.NameIdentifier).Value;
+            session.CoachId = db.Coaches.SingleOrDefault(i => i.UserId == currentUserId).CoachId;
+            return View(session);
+
+        }
+        [HttpPost]
+        public async Task<IActionResult> AddSession(Session session)
+        {
+            db.Add(session);
+            await db.SaveChangesAsync();
+            return RedirectToAction("Index", "Coach");
+        }
+        public async Task<IActionResult> SessionByCoach()
+        {
+            var currentUserId = this.User.FindFirst
+                (ClaimTypes.NameIdentifier).Value;
+            var CoachId = db.Coaches.SingleOrDefault
+                (i => i.UserId == currentUserId).CoachId;
+            var session = await db.Sessions.Where(i =>
+            i.CoachId == CoachId).ToListAsync();
+            return View(session);
+        }
+        public async Task<IActionResult> PostGrade(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+            var allSwimmers = await db.Enrollments.Include
+                (c => c.Session).Where(c => c.SessionId == id)
+                .ToListAsync();
+            if (allSwimmers == null)
+            {
+                return NotFound();
+            }
+            return View(allSwimmers);
+        }
+        [HttpPost]
+        public IActionResult PostGrade(List<Enrollment> enrollments)
+        {
+            foreach (var enrollment in enrollments)
+            {
+                var er = db.Enrollments.Find(enrollment.EnrollmentId);
+                er.LetterGrade = enrollment.LetterGrade;
+            }
+            db.SaveChanges();
+            return RedirectToAction("SessionByCoach");
+        }
     }
 }
+

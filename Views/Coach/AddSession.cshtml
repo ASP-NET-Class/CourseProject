@@ -1,0 +1,13 @@
+﻿@model CourseProject.Models.Session
+<form asp-controller="Coach" asp-action="AddSession"
+      method="post">
+    <label asp-for="SessionTitle"></label>
+    <input asp-for="SessionTitle" />
+    <br />
+    <label asp-for="SeatCapacity"></label>
+    <input asp-for="SeatCapacity" />
+    <br />
+    <input asp-for="CoachId" type="hidden" />
+    <br />
+    <button type="submit">Add Session</button>
+</form>
