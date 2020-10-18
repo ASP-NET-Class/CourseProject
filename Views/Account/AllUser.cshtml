@@ -1,14 +1,15 @@
 ﻿@model IEnumerable<Microsoft.AspNetCore.Identity.IdentityUser>
-    <p><a asp-action="Register">Add a User</a></p>
 @{
     if (Model.Count() < 1)
     {
-        
+
         <p>No user in database yet.</p>
     }
     else
     {
         <h2>All Users</h2>
+        <br />
+        <p><a asp-action="Register">Add a User</a></p>
         <table border="1">
             <tr>
                 <th>User Name</th>

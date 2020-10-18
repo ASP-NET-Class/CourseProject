@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CourseProject.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20201018000301_M12")]
-    partial class M12
+    [Migration("20201018162659_M30")]
+    partial class M30
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -168,8 +168,8 @@ namespace CourseProject.Migrations
                     b.Property<string>("SkillLevel")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Tuition")
-                        .HasColumnType("int");
+                    b.Property<decimal>("Tuition")
+                        .HasColumnType("decimal(18,2)");
 
                     b.HasKey("LessonId");
 
@@ -186,11 +186,20 @@ namespace CourseProject.Migrations
                     b.Property<int>("CoachId")
                         .HasColumnType("int");
 
+                    b.Property<DateTime>("DailyStartTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("EndDate")
+                        .HasColumnType("datetime2");
+
                     b.Property<int>("SeatCapacity")
                         .HasColumnType("int");
 
                     b.Property<string>("SessionTitle")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("StartDate")
+                        .HasColumnType("datetime2");
 
                     b.HasKey("SessionId");
 

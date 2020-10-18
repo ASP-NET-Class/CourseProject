@@ -10,15 +10,16 @@
     <link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/bootstrap/4.4.1/css/bootstrap.min.css" />
 </head>
 <body style="background-color:darkorange">
-    @if (this.User.Identity.IsAuthenticated)
-    {
-        <div>Hello, @this.User.Identity.Name</div>
-        <form method="post" asp-controller="Account" asp-action="Logout">
-            <input type="submit" value="Logout" />
-        </form>
-    }
     @RenderBody()
+    <br />
+    <div>Hello, @this.User.Identity.Name</div>
     <footer>
+        @if (this.User.Identity.IsAuthenticated)
+        {
+            <form method="post" asp-controller="Account" asp-action="Logout">
+                <input type="submit" value="Logout" />
+            </form>
+        }
         <p>&copy; @DateTime.Now.Year - L33t H4X0rz</p>
     </footer>
     <div>

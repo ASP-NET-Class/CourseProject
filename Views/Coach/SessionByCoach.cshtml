@@ -18,6 +18,7 @@
                 <th>Session Title</th>
                 <th>Seat Capacity</th>
                 <th>Post Grade</th>
+                <th>Swimmer Feedback</th>
             </tr>
             @foreach (var session in Model)
             {
@@ -30,7 +31,14 @@
                            asp-action="PostGrade"
                            asp-route-id="@session.SessionId">
                             Post grade
+                        </a></td>
+                    <td>
+                        <a asp-controller="Coach"
+                           asp-action="SwimmerFeedback"
+                           asp-area="session.SessionFeedBack">
+                            Post FeedBack
                         </a>
+                    </td>
                 </tr>
             }
         </table>
