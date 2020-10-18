@@ -9,10 +9,13 @@
         <h3>All Sessions</h3>
         <table border="1">
             <tr>
-                <th>Session Id</th>
+                <th>Session ID</th>
                 <th>Session Title</th>
-                <th>Seat Capacity</th>
                 <th>Coach Name</th>
+                <th>Start Date</th>
+                <th>End Date</th>
+                <th>Daily Start Time</th>
+                <th>Seat Capacity</th>
                 <th>Enroll Session</th>
             </tr>
             @foreach (var session in Model)
@@ -20,20 +23,24 @@
         <tr>
             <td>@session.SessionId</td>
             <td>@session.SessionTitle</td>
-            <td>@session.SeatCapacity</td>
             <td>@session.Coach.CoachName</td>
+            <td>@session.StartDate</td>
+            <td>@session.EndDate</td>
+            <td>@session.DailyStartTime</td>
+            <td>@session.SeatCapacity</td>
             <td>
-                @{ 
+                @{
                     if (session.SeatCapacity < 1)
                     {
-                        <p>Full Class</p>
+                    <p>Full Class</p>
                     }
                     else
                     {
-                        <a asp-controller="Swimmer"
-                           asp-action="EnrollSession"
-                           asp-route-id="@session.SessionId">
-                            Register</a>
+                    <a asp-controller="Swimmer"
+                       asp-action="EnrollSession"
+                       asp-route-id="@session.SessionId">
+                        Register
+                    </a>
                     }
                 }
             </td>
