@@ -5,18 +5,25 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using CourseProject.Models;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace CourseProject.Controllers
 {
-    [Authorize(Roles = "Coach")]
+    [Authorize(Roles = "Coach, Administrator")]
     public class CoachController : Controller
     {
-        private readonly ApplicationDbContext db;
-        public CoachController(ApplicationDbContext db)
+        ApplicationDbContext db;
+        UserManager<ApplicationUser> userManager;
+        RoleManager<IdentityRole> roleManager;
+        public CoachController(ApplicationDbContext db,
+            UserManager<ApplicationUser> userManager,
+            RoleManager<IdentityRole> roleManager)
         {
             this.db = db;
+            this.userManager = userManager;
+            this.roleManager = roleManager;
         }
 
         public IActionResult Index()
@@ -44,8 +51,7 @@ namespace CourseProject.Controllers
             (Coach coach)
         {
             var currentUserId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
-            if (db.Coaches.Any
-                (i => i.UserId == currentUserId))
+            if (db.Coaches.Any (i => i.UserId == currentUserId))
             {
                 var coachToUpdate = db.Coaches.FirstOrDefault
                     (i => i.UserId == currentUserId);

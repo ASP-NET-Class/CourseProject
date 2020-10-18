@@ -6,6 +6,7 @@ using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
 using CourseProject.Models;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Formatters;
 using Microsoft.EntityFrameworkCore;
@@ -18,9 +19,14 @@ namespace CourseProject.Controllers
 
     public class SwimmerController : Controller
     {
-        private readonly ApplicationDbContext db;
-        public SwimmerController(ApplicationDbContext db)
+        private ApplicationDbContext db;
+        private UserManager<ApplicationUser> userManager;
+        private RoleManager<IdentityRole> roleManager;
+        public SwimmerController(UserManager<ApplicationUser> userManager,
+            RoleManager<IdentityRole> roleManager, ApplicationDbContext db)
         {
+            this.userManager = userManager;
+            this.roleManager = roleManager;
             this.db = db;
         }
 
@@ -28,16 +34,15 @@ namespace CourseProject.Controllers
         {
             return View();
         }
-         public IActionResult AddProfile()
+        public IActionResult AddProfile()
         {
             var currentUserId = this.User.FindFirst
                 (ClaimTypes.NameIdentifier).Value;
             Swimmer swimmer = new Swimmer();
-            if (db.Swimmers.Any(i => i.UserId ==
-                currentUserId))
+            if (db.Swimmers.Any(i => i.UserId == currentUserId))
                 {
-                swimmer = db.Swimmers.FirstOrDefault(i =>
-                i.UserId == currentUserId);
+                    swimmer = db.Swimmers.FirstOrDefault(i =>
+                    i.UserId == currentUserId);
                 }
             else
             {
@@ -47,8 +52,7 @@ namespace CourseProject.Controllers
             
         }
         [HttpPost]
-        public async Task<IActionResult> AddProfile
-            (Swimmer swimmer)
+        public async Task<IActionResult> AddProfile (Swimmer swimmer)
         {
             var currentUserId = this.User.FindFirst
                 (ClaimTypes.NameIdentifier).Value;
@@ -57,6 +61,9 @@ namespace CourseProject.Controllers
                 var swimmerToUpdate = db.Swimmers.FirstOrDefault
                     (i => i.UserId == currentUserId);
                 swimmerToUpdate.SwimmerName = swimmer.SwimmerName;
+                swimmerToUpdate.SwimmerPhone = swimmer.SwimmerPhone;
+                swimmerToUpdate.SwimmerGender = swimmer.SwimmerGender;
+                swimmerToUpdate.SwimmerDob = swimmer.SwimmerDob;
                 db.Update(swimmerToUpdate);
             }
             else
@@ -66,6 +73,8 @@ namespace CourseProject.Controllers
             await db.SaveChangesAsync();
             return View("Index");
         }
+
+
         public async Task<IActionResult> SwimmerAllSession()
         {
             var session = await db.Sessions.Include
