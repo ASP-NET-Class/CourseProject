@@ -4,16 +4,26 @@
 <html>
 <head>
     <meta charset="utf-8" />
-    <title>Smith Swimming School</title>
+    <meta name="viewport" content="width=device-width,
+          initial-scale=1.0" />
+    <title>@ViewData["Title"] - Smith Swimming School</title>
+    <link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/bootstrap/4.4.1/css/bootstrap.min.css" />
 </head>
 <body style="background-color:darkorange">
-@if (this.User.Identity.IsAuthenticated)
-{
-    <div>Hello, @this.User.Identity.Name</div>
-    <form method="post" asp-controller="Account" asp-action="Logout">
-        <input type="submit" value="Logout" />
-    </form>
-}
+    @if (this.User.Identity.IsAuthenticated)
+    {
+        <div>Hello, @this.User.Identity.Name</div>
+        <form method="post" asp-controller="Account" asp-action="Logout">
+            <input type="submit" value="Logout" />
+        </form>
+    }
     @RenderBody()
+    <footer>
+        <p>&copy; @DateTime.Now.Year - L33t H4X0rz</p>
+    </footer>
+    <div>
+        <script src="https://ajax.aspnet.cdn.com/ajax/bootstrap/4.4.1/bootstrap.min.js">
+        </script>
+    </div>
 </body>
 </html>

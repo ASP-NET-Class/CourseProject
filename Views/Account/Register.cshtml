@@ -1,21 +1,26 @@
 ﻿@model CourseProject.ViewModels.AccountRegisterViewModel
 
 <h2>User Registration</h2>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <form asp-action="Register" method="post">
     <!--displays all error messages in this place if any-->
-    <div asp-validation-summary="All"></div>
-    <label asp-for="Email    "></label>
-    <input asp-for="Email" />
+    <div asp-validation-summary="All" /></div>
+    <label asp-for="Email"></label>
+    <input asp-for="Email" inputmode="email" class="form-control" maxlength="256" />
     <!--displays error message related to email in that span element if any-->
     <span asp-validation-for="Email"></span>
     <br />
     <label asp-for="Password"></label>
-    <input asp-for="Password" />
+    <input asp-for="Password" inputmode="password" class="form-control" maxlength="20" />
     <!--displays error message related to password in that span element if any-->
     <span asp-validation-for="Password"></span>
     <br />
     <label asp-for="ConfirmPassword"></label>
-    <input asp-for="ConfirmPassword" />
+    <input asp-for="ConfirmPassword" inputmode="Confirm Password" class="form-control" maxlength="20"/>
     <!--displays error message related to ConfirmPassword in that span element if any-->
     <span asp-validation-for="ConfirmPassword"></span>
     <br />
