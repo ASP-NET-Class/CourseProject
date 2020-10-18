@@ -9,7 +9,7 @@ namespace CourseProject.Models
     // this will likely be the session progress report information
     public enum LetterGrade
     {
-        A, B, C, D, F, I, W, P
+        New, Poor, Developing, Excellent
     }
 
     public class Enrollment
