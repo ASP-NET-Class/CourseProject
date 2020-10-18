@@ -7,6 +7,8 @@ using System.Threading.Tasks;
 using CourseProject.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Formatters;
+using Microsoft.EntityFrameworkCore;
 
 namespace CourseProject.Controllers
 {
@@ -63,6 +65,54 @@ namespace CourseProject.Controllers
             }
             await db.SaveChangesAsync();
             return View("Index");
+        }
+        public async Task<IActionResult> SwimmerAllSession()
+        {
+            var session = await db.Sessions.Include
+                (c => c.Coach).ToListAsync();
+            return View(session);
+        }
+        public async Task<IActionResult> EnrollSession(int id)
+        {
+            var currentUserId = this.User.FindFirst
+                (ClaimTypes.NameIdentifier).Value;
+            var swimmerId = db.Swimmers.FirstOrDefault
+                (s => s.UserId == currentUserId).SwimmerId;
+            Enrollment enrollment = new Enrollment
+            {
+                SessionId = id,
+                SwimmerId = swimmerId
+            };
+            db.Add(enrollment);
+            var session = await db.Sessions.FindAsync
+                (enrollment.SessionId);
+            session.SeatCapacity--;
+            await db.SaveChangesAsync();
+            return View("Index");
+        }
+        public async Task<IActionResult> CheckGrade()
+        {
+            ClaimsPrincipal currentUser = this.User;
+            var currentUserId = currentUser.FindFirst
+                (ClaimTypes.NameIdentifier).Value;
+            if (currentUserId == null)
+            {
+                return NotFound();
+            }
+            var swimmer = await db.Swimmers
+                .SingleOrDefaultAsync
+                (s => s.UserId == currentUserId);
+            var swimmerId = swimmer.SwimmerId;
+            var allSessions = await db.Enrollments
+                .Include(e => e.Session).Where
+                (c => c.SwimmerId == swimmerId)
+                .ToListAsync();
+            if (allSessions == null)
+            {
+                return NotFound();
+            }
+            ViewData["sname"] = swimmer.SwimmerName;
+            return View(allSessions);
         }
     }
 }
