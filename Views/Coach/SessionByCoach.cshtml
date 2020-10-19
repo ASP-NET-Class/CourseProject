@@ -3,11 +3,8 @@
 @{
     if (Model.Count() < 1)
     {
-        <p>
-            You don't have any sessions yet. <a asp-for="AddSession">
-                Add a session
-            </a>
-        </p>
+        <p><a asp-action="AddSession">Add a Session</a></p>
+        <p>No session in database yet.</p>
     }
     else
     {
@@ -16,30 +13,41 @@
             <tr>
                 <th>Session ID</th>
                 <th>Session Title</th>
+                <th>Start Date of Session</th>
+                <th>End Date of Session</th>
                 <th>Seat Capacity</th>
+                <th>Daily Start Time</th>
                 <th>Post Grade</th>
                 <th>Swimmer Feedback</th>
+                <th>Edit</th>
+                <th>Delete</th>
             </tr>
             @foreach (var session in Model)
             {
-                <tr>
-                    <td>@session.SessionId</td>
-                    <td>@session.SessionTitle</td>
-                    <td>@session.SeatCapacity</td>
-                    <td>
-                        <a asp-controller="Coach"
-                           asp-action="PostGrade"
-                           asp-route-id="@session.SessionId">
-                            Post grade
-                        </a></td>
-                    <td>
-                        <a asp-controller="Coach"
-                           asp-action="SwimmerFeedback"
-                           asp-area="session.SessionFeedBack">
-                            Post FeedBack
-                        </a>
-                    </td>
-                </tr>
+        <tr>
+            <td>@session.SessionId</td>
+            <td>@session.SessionTitle</td>
+            <td>@session.StartDate</td>
+            <td>@session.EndDate</td>
+            <td>@session.SeatCapacity</td>
+            <td>@session.DailyStartTime</td>
+        <td>
+            <a asp-controller="Coach"
+               asp-action="PostGrade"
+               asp-route-id="@session.SessionId">
+                Post grade
+            </a>
+        </td>
+        <td>
+            <a asp-controller="Coach"
+               asp-action="SwimmerFeedback"
+               asp-area="session.SessionFeedBack">
+                Post FeedBack
+            </a>
+        </td>
+        <td><a asp-action="EditSession" asp-route-id="@session.SessionId">Edit</a></td>
+        <td><a asp-action="DeleteSession" asp-route-id="@session.SessionId">Delete</a></td>
+        </tr>
             }
         </table>
     }
