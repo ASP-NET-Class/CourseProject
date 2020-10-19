@@ -2,14 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
+//using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CourseProject.Controllers
 {
     public class HomeController : Controller
     {
-        [Authorize]
+        //[Authorize]
         public IActionResult Index()
         {
             return View();
