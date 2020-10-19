@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using CourseProject.Models;
 using CourseProject.ViewModels;
-//using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 

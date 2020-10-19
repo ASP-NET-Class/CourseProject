@@ -1,4 +1,5 @@
 ﻿@model CourseProject.Models.Session
+    <h2>Add a Session</h2>
 <form asp-controller="Coach" asp-action="AddSession"
       method="post">
     <label asp-for="SessionTitle"></label>
@@ -20,4 +21,6 @@
     <br />
     <button type="submit">Add Session</button>
 </form>
+<p><a asp-controller="Coach" asp-action="AllLesson">Back to Lesson List</a></p>
+<br />
 <p><a asp-action="Index">Back to Coach Home</a></p>

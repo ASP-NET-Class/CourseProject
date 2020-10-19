@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using CourseProject.Models;
 using CourseProject.ViewModels;
-//using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -13,7 +13,7 @@ namespace CourseProject.Controllers
 {
     // makes it so only Administrators have access to the Role Controller 
     // and being able to make changes to assigned roles
-    //[Authorize(Roles ="Administrator")]
+    [Authorize(Roles ="Administrator")]
 
 
     public class AdminController : Controller

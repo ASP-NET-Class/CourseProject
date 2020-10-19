@@ -4,14 +4,14 @@ using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using CourseProject.Models;
-//using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace CourseProject.Controllers
 {
-    //[Authorize(Roles = "Coach, Administrator")]
+    [Authorize(Roles = "Coach, Administrator")]
     public class CoachController : Controller
     {
         ApplicationDbContext db;
@@ -67,6 +67,12 @@ namespace CourseProject.Controllers
             await db.SaveChangesAsync();
             return View("Index");
         }
+
+        public IActionResult AllLesson()
+        {
+            return View(db.Lessons);
+        }
+
         public IActionResult AddSession()
         {
             Session session = new Session();

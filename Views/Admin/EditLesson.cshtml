@@ -1,7 +1,7 @@
 ﻿@model CourseProject.Models.Lesson
 <h3>Edit the Lesson</h3>
 <form asp-controller="Admin" asp-action="EditLesson"
-    method="post">
+      method="post">
     <input asp-for="LessonId" type="hidden" />
     <label asp-for="LessonTitle"></label>
     <input asp-for="LessonTitle" />
@@ -14,3 +14,6 @@
     <br />
     <button type="submit">Update Lesson</button>
 </form>
+<p><a asp-controller="Admin" asp-action="AllLesson">Back to All Lessons</a></p>
+<br />
+<p><a asp-controller="Admin" asp-action="Index">Back to Administrator Homepage</a></p>

@@ -5,7 +5,7 @@ using System.Security.Claims;
 using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
 using CourseProject.Models;
-//using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Formatters;
@@ -15,7 +15,7 @@ namespace CourseProject.Controllers
 {
     // makes it so only Swimmers and Administrators have access to the Swimmer Controller 
     // and being able to make changes
-    //[Authorize(Roles = "Swimmer, Administrator")]
+    [Authorize(Roles = "Swimmer, Administrator")]
 
     public class SwimmerController : Controller
     {
