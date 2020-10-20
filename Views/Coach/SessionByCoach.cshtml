@@ -17,38 +17,28 @@
                 <th>End Date of Session</th>
                 <th>Seat Capacity</th>
                 <th>Daily Start Time</th>
-                <th>Post Grade</th>
-                <th>Swimmer Feedback</th>
                 <th>Edit</th>
                 <th>Delete</th>
             </tr>
             @foreach (var session in Model)
             {
-        <tr>
-            <td>@session.SessionId</td>
-            <td>@session.SessionTitle</td>
-            <td>@session.StartDate</td>
-            <td>@session.EndDate</td>
-            <td>@session.SeatCapacity</td>
-            <td>@session.DailyStartTime</td>
-        <td>
-            <a asp-controller="Coach"
-               asp-action="PostGrade"
-               asp-route-id="@session.SessionId">
-                Post grade
-            </a>
-        </td>
-        <td>
-            <a asp-controller="Coach"
-               asp-action="SwimmerFeedback"
-               asp-area="session.SessionFeedBack">
-                Post FeedBack
-            </a>
-        </td>
-        <td><a asp-action="EditSession" asp-route-id="@session.SessionId">Edit</a></td>
-        <td><a asp-action="DeleteSession" asp-route-id="@session.SessionId">Delete</a></td>
-        </tr>
-            }
+                <tr>
+                    <td>
+                        <a asp-controller="Coach"
+                           asp-action="SwimmerName"
+                           asp-route-id="@session.SessionId">
+                            @session.SessionId
+                    </a>
+                </td>
+                <td>@session.SessionTitle</td>
+                <td>@session.StartDate</td>
+                <td>@session.EndDate</td>
+                <td>@session.SeatCapacity</td>
+                <td>@session.DailyStartTime</td>
+                <td><a asp-action="EditSession" asp-route-id="@session.SessionId">Edit</a></td>
+                <td><a asp-action="DeleteSession" asp-route-id="@session.SessionId">Delete</a></td>
+            </tr>
+        }
         </table>
     }
 }

@@ -1,5 +1,5 @@
 ﻿@model CourseProject.Models.Session
-    <h2>Add a Session</h2>
+<h2>Add a Session</h2>
 <form asp-controller="Coach" asp-action="AddSession"
       method="post">
     <label asp-for="SessionTitle"></label>
@@ -9,10 +9,10 @@
     <input asp-for="SeatCapacity" />
     <br />
     <label asp-for="StartDate"></label>
-    <input asp-for="StartDate" />
+    <input asp-for="StartDate" asp-format="{0:dd/MM/yyyy}" />
     <br />
     <label asp-for="EndDate"></label>
-    <input asp-for="EndDate" />
+    <input asp-for="EndDate" asp-format="{0:dd/MM/yyyy}" />
     <br />
     <label asp-for="DailyStartTime"></label>
     <input asp-for="DailyStartTime" />

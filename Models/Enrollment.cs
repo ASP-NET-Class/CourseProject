@@ -17,7 +17,7 @@ namespace CourseProject.Models
         public int EnrollmentId { get; set; }
         public int SwimmerId { get; set; }
         public int SessionId { get; set; }
-        public Swimmer Swimmer { get; set; }
+        public Swimmer SwimmerName { get; set; }
         public Session Session { get; set; }
         [DisplayFormat(NullDisplayText = "No Grade")]
         public LetterGrade? LetterGrade { get; set; }
