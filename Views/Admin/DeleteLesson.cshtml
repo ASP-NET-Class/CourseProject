@@ -4,13 +4,13 @@
 <form asp-controller="Admin" asp-action="DeleteLesson"
     method="post">
     <input asp-for="LessonId" type="hidden" />
-    <label asp-for="LessonTitle"></label>
+    <label asp-for="LessonTitle">Lesson Name</label>
     <input asp-for="LessonTitle" />
     <br />
-    <label asp-for="SkillLevel"></label>
+    <label asp-for="SkillLevel">Skill Level</label>
     <input asp-for="SkillLevel" />
     <br />
-    <label asp-for="Tuition"></label>
+    <label asp-for="Tuition">Tuition</label>
     <input asp-for="Tuition" />
     <br />
     <button type="submit">Yes Delete</button>
@@ -20,3 +20,4 @@
         No, Back to list
     </a>
 </p>
+<p><a asp-controller="Admin" asp-action="Index">Back to Administrator Homepage</a></p>
