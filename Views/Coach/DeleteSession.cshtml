@@ -4,7 +4,7 @@
 <form asp-controller="Coach" asp-action="DeleteSession"
     method="post">
     <input asp-for="SessionId" type="hidden" />
-    <label asp-for="SessionTitle"></label>
+    <label asp-for="SessionTitle">Session Name</label>
     <input asp-for="SessionTitle" />
     <button type="submit">Yes Delete</button>
 </form>
@@ -13,3 +13,4 @@
         No, Back to list
     </a>
 </p>
+<p><a asp-action="Index">Back to Coach Home</a></p>

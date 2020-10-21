@@ -2,36 +2,29 @@
 
 <h2>User Registration</h2>
 <meta charset="utf-8">
-<meta name="viewport" content="width=100, initial-scale=1">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <form asp-action="Register" method="post">
     <!--displays all error messages in this place if any-->
-        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-        <label asp-for="Email" class="form-group" ></label>
-        <input asp-for="Email" class="form-group" padding="10px"/>
-        <span asp-validation-for="Email" class="text-danger"></span>
-        <br />
-        <label asp-for="Password"></label>
-        <input asp-for="Password" inputmode="password" class="form-group" maxlength="20" />
-        <!--displays error message related to password in that span element if any-->
-        <span asp-validation-for="Password"></span>
-        <br />
-        <label asp-for="ConfirmPassword"></label>
-        <input asp-for="ConfirmPassword" inputmode="Confirm Password" class="form-group" maxlength="20" />
-        <!--displays error message related to ConfirmPassword in that span element if any-->
-        <span asp-validation-for="ConfirmPassword"></span>
-        <br />
-        <!--makes register button on registration form work-->
-        <button type="submit">Register</button>
-        <br />
-        <br />
-        <footer>
-            @Html.ActionLink("Return to Login Screen", "Login")
-        </footer>
-        <div>
-            <script src="https://ajax.aspnet.cdn.com/ajax/bootstrap/4.4.1/bootstrap.min.js">
-            </script>
-        </div>
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <label asp-for="Email" class="form-group" ></label>
+    <input asp-for="Email" class="form-group" padding="10px"/>
+    <span asp-validation-for="Email" class="text-danger"></span>
+    <br />
+    <label asp-for="Password"></label>
+    <input asp-for="Password" inputmode="password" class="form-group" maxlength="20" />
+    <!--displays error message related to password in that span element if any-->
+    <span asp-validation-for="Password"></span>
+    <br />
+    <label asp-for="ConfirmPassword"></label>
+    <input asp-for="ConfirmPassword" inputmode="Confirm Password" class="form-group" maxlength="20" />
+    <!--displays error message related to ConfirmPassword in that span element if any-->
+    <span asp-validation-for="ConfirmPassword"></span>
+    <br />
+    <!--makes register button on registration form work-->
+    <button type="submit">Register</button>
+    <br />
+    <br />
+    <footer>
+        @Html.ActionLink("Return to Login Screen", "Login")
+    </footer>
+
 </form>

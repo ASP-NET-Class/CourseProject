@@ -120,7 +120,7 @@ namespace CourseProject.Controllers
             foreach (var enrollment in enrollments)
             {
                 var er = db.Enrollments.Find(enrollment.EnrollmentId);
-                er.LetterGrade = enrollment.LetterGrade;
+                er.SetLetterGrade(enrollment.GetLetterGrade());
             }
             db.SaveChanges();
             return RedirectToAction("SessionByCoach");

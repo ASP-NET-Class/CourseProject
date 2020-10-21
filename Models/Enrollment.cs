@@ -21,5 +21,15 @@ namespace CourseProject.Models
         public Session Session { get; set; }
         [DisplayFormat(NullDisplayText = "No Grade")]
         public LetterGrade? LetterGrade { get; set; }
+
+        internal void SetLetterGrade(object p)
+        {
+            throw new NotImplementedException();
+        }
+
+        internal object GetLetterGrade()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
