@@ -4,14 +4,16 @@ using CourseProject.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace CourseProject.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20201021195527_M62")]
+    partial class M62
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -117,9 +119,6 @@ namespace CourseProject.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("CoachId")
-                        .HasColumnType("int");
-
                     b.Property<int?>("LetterGrade")
                         .HasColumnType("int");
 
@@ -130,8 +129,6 @@ namespace CourseProject.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("EnrollmentId");
-
-                    b.HasIndex("CoachId");
 
                     b.HasIndex("SessionId");
 
@@ -170,6 +167,9 @@ namespace CourseProject.Migrations
 
                     b.Property<int>("CoachId")
                         .HasColumnType("int");
+
+                    b.Property<string>("CoachName")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("DailyStartTime")
                         .HasColumnType("datetime2");
@@ -362,10 +362,6 @@ namespace CourseProject.Migrations
 
             modelBuilder.Entity("CourseProject.Models.Enrollment", b =>
                 {
-                    b.HasOne("CourseProject.Models.Coach", "Coach")
-                        .WithMany("Enrollments")
-                        .HasForeignKey("CoachId");
-
                     b.HasOne("CourseProject.Models.Session", "Session")
                         .WithMany("Enrollments")
                         .HasForeignKey("SessionId")

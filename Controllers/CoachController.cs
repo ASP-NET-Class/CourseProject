@@ -99,6 +99,23 @@ namespace CourseProject.Controllers
             i.CoachId == CoachId).ToListAsync();
             return View(session);
         }
+        
+        /*
+            var postGradeSwimmer = await db.Enrollments.Where
+                (e => e.SwimmerId == id).ToListAsync();
+            List<Swimmer> gradedswimmer = new List<Swimmer>();
+            foreach (var e in postGradeSwimmer)
+            {
+                var swimmer = await db.Swimmers.
+                    SingleOrDefaultAsync
+                    (s => s.SwimmerId == e.SwimmerId);
+                gradedswimmer.Add(swimmer);
+            }
+            ViewData["enrollment"] = db.Swimmers.Find(id).SwimmerName;
+            return View(gradedswimmer);
+        }*/
+
+
         public async Task<IActionResult> PostGrade(int? id)
         {
             if (id == null)
@@ -120,7 +137,7 @@ namespace CourseProject.Controllers
             foreach (var enrollment in enrollments)
             {
                 var er = db.Enrollments.Find(enrollment.EnrollmentId);
-                er.SetLetterGrade(enrollment.GetLetterGrade());
+                er.LetterGrade = enrollment.LetterGrade;
             }
             db.SaveChanges();
             return RedirectToAction("SessionByCoach");

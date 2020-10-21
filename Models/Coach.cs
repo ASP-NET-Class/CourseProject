@@ -14,5 +14,6 @@ namespace CourseProject.Models
         public string UserId { get; set; }
         public virtual ApplicationUser User { get; set; }
         public ICollection<Session> Sessions { get; set; }
+        public ICollection<Enrollment> Enrollments { get; set; }
     }
 }

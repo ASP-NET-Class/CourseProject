@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 
 namespace CourseProject.Models
 {
-    // this will likely be the session progress report information
     public enum LetterGrade
     {
         New, Poor, Developing, Excellent
@@ -19,10 +18,11 @@ namespace CourseProject.Models
         public int SessionId { get; set; }
         public Swimmer SwimmerName { get; set; }
         public Session Session { get; set; }
+        public Coach Coach { get; set; }
         [DisplayFormat(NullDisplayText = "No Grade")]
         public LetterGrade? LetterGrade { get; set; }
 
-        internal void SetLetterGrade(object p)
+        /*internal void SetLetterGrade(object p)
         {
             throw new NotImplementedException();
         }
@@ -30,6 +30,6 @@ namespace CourseProject.Models
         internal object GetLetterGrade()
         {
             throw new NotImplementedException();
-        }
+        }*/
     }
 }

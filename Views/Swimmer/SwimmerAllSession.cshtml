@@ -24,9 +24,9 @@
             <td>@session.SessionId</td>
             <td>@session.SessionTitle</td>
             <td>@session.Coach.CoachName</td>
-            <td>@session.StartDate</td>
-            <td>@session.EndDate</td>
-            <td>@session.DailyStartTime</td>
+            <td>@session.StartDate.ToString("MM/dd/yyyy")</td>
+            <td>@session.EndDate.ToString("MM/dd/yyyy")</td>
+            <td>@session.DailyStartTime.ToString("HH:mm")</td>
             <td>@session.SeatCapacity</td>
             <td>
                 @{

@@ -4,14 +4,16 @@ using CourseProject.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace CourseProject.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20201021200125_M63")]
+    partial class M63
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -362,7 +364,7 @@ namespace CourseProject.Migrations
 
             modelBuilder.Entity("CourseProject.Models.Enrollment", b =>
                 {
-                    b.HasOne("CourseProject.Models.Coach", "Coach")
+                    b.HasOne("CourseProject.Models.Coach", null)
                         .WithMany("Enrollments")
                         .HasForeignKey("CoachId");
 

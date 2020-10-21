@@ -4,12 +4,15 @@
     <tr>
         <th>Session Title</th>
         <th>Grade</th>
+        <th>Coach</th>
     </tr>
     @foreach (var c in Model)
     {
         <tr>
             <td>@c.Session.SessionTitle</td>
             <td>@Html.DisplayFor(m => c.LetterGrade)</td>
+            <!--<td><a asp-controller="Coach" asp-action="AddProfile"
+                asp-route-id="@c.Coach.CoachId">@c.Coach.CoachName</a></td>-->
         </tr>
     }
 </table>
